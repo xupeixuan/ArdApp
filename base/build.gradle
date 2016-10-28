@@ -53,4 +53,7 @@ dependencies {
     androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
+
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.aliyun.dpa:oss-android-sdk:2.3.0'
 }

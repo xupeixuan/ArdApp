@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ArdApp</string>
+    <string name="drawer_item_user_info">用户信息</string>
+    <string name="drawer_item_setting">个人设置</string>
 </resources>
