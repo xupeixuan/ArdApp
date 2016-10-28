@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release_config {
+            keyAlias "ardapp"
+            keyPassword "29821630"
+            storeFile file('../keystore/ardapp.jks')
+            storePassword '29821630'
+        }
+    }
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
@@ -11,6 +20,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         debug {
             minifyEnabled true
@@ -21,6 +31,8 @@ android {
         release {
             minifyEnabled true
             useProguard true
+            shrinkResources true
+            signingConfig signingConfigs.release_config
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,11 +41,14 @@ android {
         mock {
             applicationIdSuffix = ".mock"
         }
+
+        ardapp {
+        }
     }
 
     // Remove mockRelease as it's not needed.
     android.variantFilter { variant ->
-        if(variant.buildType.name.equals('release')
+        if (variant.buildType.name.equals('release')
                 && variant.getFlavors().get(0).name.equals('mock')) {
             variant.setIgnore(true);
         }
