@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">ArdApp</string>
+    <string name="app_name">锁屏</string>
+    <string name="description_for_permission">获取设备权限是为锁屏操作</string>
+    <string name="forbid_lock_screen">你不是设备管理员，无权限一键锁屏</string>
+    <string name="tip_for_uninstall">如果需要删除本应用，请先在设备管理器中撤销应用的激活状态</string>
 </resources>

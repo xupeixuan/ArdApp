@@ -12,11 +12,18 @@ import com.xpx.base.util.debug.ViewServer;
  */
 
 public class BaseApplication extends Application {
+    private static BaseApplication mApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mApplication = this;
         installLeakCanary();
         installViewServer();
+    }
+
+    public static Application getInstance() {
+        return mApplication;
     }
 
     private void installLeakCanary() {
