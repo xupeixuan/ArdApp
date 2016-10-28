@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     resourcePrefix "base_"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 24
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -24,10 +24,33 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+
+    testCompile "junit:junit:$rootProject.ext.junitVersion"
+    testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+
+    // Dependencies for Android unit tests
+    androidTestCompile "junit:junit:$rootProject.ext.junitVersion"
+    androidTestCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
+    // Espresso UI Testing
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:24.2.1'
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+
+    // Android Testing Support Library's runner and rules
+    androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestCompile "com.android.support.test:rules:$rootProject.ext.runnerVersion"
+
+    //leakCanary
+    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
 }
